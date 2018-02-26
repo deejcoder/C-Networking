@@ -24,31 +24,35 @@ namespace RawMessenger.Networking
     {
         private Socket mainSocket;
         private int count;
+        private MessengerWindow window;
 
-        public Server() { }
+        public Server(MessengerWindow window) {
+            this.window = window;
 
+        }
+
+        private Logging.Console logger;
         public void StartListening()
         {
-            Console.Write("Starting server on localhost:5050...\n");
+            logger = new Logging.Console(window);
+            logger.ServerLog("Starting server on localhost:5050...\n");
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 5050);
 
-            mainSocket = new Socket(ipAddress.AddressFamily,
-                SocketType.Stream, ProtocolType.Tcp);
-
+            mainSocket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             try
             {
                 mainSocket.Bind(localEndPoint);
                 mainSocket.Listen(Constants.PORT);
 
-                Console.Write("Listening...");
+                logger.ServerLog("Listening...\n");
                 mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), null);
-                Console.Write("Incoming connection from " + localEndPoint);
+                logger.ServerLog("Incoming connection from " + localEndPoint + "\n");
             }
             catch(SocketException e)
             {
-                Console.Write("Error: " + e.ToString());
+                logger.ServerLog("Error: " + e.ToString());
             }
 
         }
@@ -56,7 +60,7 @@ namespace RawMessenger.Networking
 
         public void OnClientIncomingConnection(IAsyncResult ar)
         {
-            Console.Write("Connected.");
+            logger.ServerLog("Connected.\n");
             //if max clients for now, reject connection
             if (count > Constants.MAX_CLIENTS)
             {
@@ -87,7 +91,7 @@ namespace RawMessenger.Networking
             if(bytesRead > 0 && bytesRead < Constants.BUFFER_SIZE)
             {
                 content = Encoding.ASCII.GetString(so.buffer, 0, bytesRead);
-                Console.Write(content);
+                logger.ServerLog(content + "\n");
             } 
         }
     }

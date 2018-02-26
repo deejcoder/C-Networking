@@ -11,19 +11,35 @@ using RawMessenger.Networking;
 
 namespace RawMessenger
 {
-    public partial class Form1 : Form
+    public partial class MessengerWindow : Form
     {
-        public Form1()
+        public MessengerWindow()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Server s = new Server();
+            Server s = new Server(this);
             s.StartListening();
 
-            Client.Send("127.0.0.1", "Hello");
+            Client c = new Client(this);
+            c.Send("127.0.0.1", "Hello");
+        }
+
+        public void AppendToMessages(string msg)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendToMessages), new object[] { msg });
+                return;
+            }
+            Text_Messages.AppendText(msg);
+        }
+
+        private void Text_Messages_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

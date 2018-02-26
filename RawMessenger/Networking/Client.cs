@@ -10,9 +10,18 @@ namespace RawMessenger.Networking
 {
     class Client
     {
-        public static void Send(string ip, string msg)
+
+        private Logging.Console logger;
+
+        public Client(MessengerWindow window)
         {
-            Console.Write("Establishing connection to ... " + ip);
+            logger = new Logging.Console(window);
+        }
+
+        public void Send(string ip, string msg)
+        {
+
+            logger.ServerLog("Establishing connection to ... " + ip + "\n");
 
             try
             {
@@ -21,7 +30,7 @@ namespace RawMessenger.Networking
                 IPAddress ipAddress = ipHostInfo.AddressList[0];
                 TcpClient client = new TcpClient(ipAddress.ToString(), 5050);
 
-                /*
+                
                 Byte[] bytes = new Byte[256];
                 bytes = Encoding.ASCII.GetBytes(msg);
 
@@ -30,14 +39,14 @@ namespace RawMessenger.Networking
                 
 
                 stream.Close();
-                */
-                //client.Close();
+                
+                client.Close();
 
             }
             catch (SocketException e)
             {
 
-                Console.Write("An error has occured: " + e.ToString());
+                logger.ServerLog("An error has occured: " + e.ToString());
             }
 
          }
