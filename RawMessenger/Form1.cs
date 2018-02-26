@@ -46,11 +46,9 @@ namespace RawMessenger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Server s = new Server(this);
-            s.StartListening(5050);
 
-            Client c = new Client(this);
-            c.Send("127.0.0.1", "Hello");
+
+
         }
 
         public void AppendToMessages(string msg)
@@ -74,13 +72,25 @@ namespace RawMessenger
             }
         }
 
+        /*
+         *  UI Interactions
+         *  
+         */
 
-        private void Text_Messages_TextChanged(object sender, EventArgs e)
+        private void Button_Connect_Click(object sender, EventArgs e)
         {
-
+            Server s = new Server(this);
+            s.StartListening(Int32.Parse(Text_IP.Text));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button_Send_Click(object sender, EventArgs e)
+        {
+            Client c = new Client(this);
+            c.Send(Text_IP.Text, Text_Message.Text);
+        }
+
+
+        private void Text_Messages_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -90,9 +100,9 @@ namespace RawMessenger
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button_Close_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

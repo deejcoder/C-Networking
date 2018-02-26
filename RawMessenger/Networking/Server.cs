@@ -39,12 +39,12 @@ namespace RawMessenger.Networking
 
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 5050);
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
             StateObject so = new StateObject();
             so.ip = ipAddress;
             so.port = port;
 
-            logger.ServerLog("SERVER: Starting server on " + ipAddress + ":" + Constants.PORT + " ...\n");
+            logger.ServerLog("SERVER: Starting server on " + ipAddress + ":" + port + " ...\n");
 
 
 
@@ -53,10 +53,10 @@ namespace RawMessenger.Networking
             try
             {
                 mainSocket.Bind(localEndPoint);
-                mainSocket.Listen(Constants.PORT);
+                mainSocket.Listen(port);
 
                 mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), so);
-                logger.ServerLog("SERVER: Incoming connection from " + ipAddress + ":" + Constants.PORT + "\n");
+                logger.ServerLog("SERVER: Incoming connection from " + ipAddress + ":" + port + "\n");
             }
             catch(SocketException e)
             {

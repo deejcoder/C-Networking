@@ -18,7 +18,7 @@ namespace RawMessenger.Networking
             logger = new Logging.Console(window);
         }
 
-        public void Send(string ip, string msg)
+        public void Send(string port, string msg)
         {
 
             try
@@ -26,7 +26,7 @@ namespace RawMessenger.Networking
 
                 IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
                 IPAddress ipAddress = ipHostInfo.AddressList[0];
-                TcpClient client = new TcpClient(ipAddress.ToString(), 5050);
+                TcpClient client = new TcpClient(ipAddress.ToString(), Int32.Parse(port));
 
                 
                 Byte[] bytes = new Byte[256];

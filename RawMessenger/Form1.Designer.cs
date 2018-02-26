@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.TopMenu = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Text_Message = new System.Windows.Forms.TextBox();
+            this.Button_Send = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Text_IP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Button_Connect = new System.Windows.Forms.Button();
             this.Text_Messages = new System.Windows.Forms.RichTextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.Button_Close = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.TopMenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -48,7 +48,7 @@
             // 
             this.TopMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(71)))), ((int)(((byte)(96)))));
             this.TopMenu.Controls.Add(this.button5);
-            this.TopMenu.Controls.Add(this.button4);
+            this.TopMenu.Controls.Add(this.Button_Close);
             this.TopMenu.Controls.Add(this.label1);
             this.TopMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopMenu.ForeColor = System.Drawing.Color.HotPink;
@@ -60,30 +60,30 @@
             this.TopMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.TopMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopMenu_MouseDown);
             // 
-            // textBox1
+            // Text_Message
             // 
-            this.textBox1.Location = new System.Drawing.Point(173, 334);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(308, 20);
-            this.textBox1.TabIndex = 4;
+            this.Text_Message.Location = new System.Drawing.Point(173, 334);
+            this.Text_Message.Name = "Text_Message";
+            this.Text_Message.Size = new System.Drawing.Size(308, 20);
+            this.Text_Message.TabIndex = 4;
             // 
-            // button1
+            // Button_Send
             // 
-            this.button1.Location = new System.Drawing.Point(487, 332);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Send";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Button_Send.Location = new System.Drawing.Point(487, 332);
+            this.Button_Send.Name = "Button_Send";
+            this.Button_Send.Size = new System.Drawing.Size(50, 23);
+            this.Button_Send.TabIndex = 5;
+            this.Button_Send.Text = "Send";
+            this.Button_Send.UseVisualStyleBackColor = true;
+            this.Button_Send.Click += new System.EventHandler(this.Button_Send_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(71)))), ((int)(((byte)(96)))));
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.Button_Connect);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.Text_IP);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 22);
             this.panel1.Name = "panel1";
@@ -101,16 +101,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "RM";
             // 
-            // textBox2
+            // Text_IP
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(101)))), ((int)(((byte)(126)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.textBox2.Location = new System.Drawing.Point(13, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 13);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "127.0.0.1:5050";
+            this.Text_IP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(101)))), ((int)(((byte)(126)))));
+            this.Text_IP.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Text_IP.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Text_IP.Location = new System.Drawing.Point(13, 29);
+            this.Text_IP.Name = "Text_IP";
+            this.Text_IP.Size = new System.Drawing.Size(134, 13);
+            this.Text_IP.TabIndex = 1;
+            this.Text_IP.Text = "127.0.0.1:5050";
             // 
             // label2
             // 
@@ -137,20 +137,20 @@
             this.button3.Text = "Blacklist";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // Button_Connect
             // 
-            this.button2.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Location = new System.Drawing.Point(75, 48);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(72, 24);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Connect";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Button_Connect.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.Button_Connect.FlatAppearance.BorderSize = 0;
+            this.Button_Connect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Connect.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Connect.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.Button_Connect.Location = new System.Drawing.Point(75, 48);
+            this.Button_Connect.Name = "Button_Connect";
+            this.Button_Connect.Size = new System.Drawing.Size(72, 24);
+            this.Button_Connect.TabIndex = 6;
+            this.Button_Connect.Text = "Connect";
+            this.Button_Connect.UseVisualStyleBackColor = false;
+            this.Button_Connect.Click += new System.EventHandler(this.Button_Connect_Click);
             // 
             // Text_Messages
             // 
@@ -165,18 +165,19 @@
             this.Text_Messages.TabIndex = 7;
             this.Text_Messages.Text = "";
             // 
-            // button4
+            // Button_Close
             // 
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Corbel", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(524, 1);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(18, 19);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "X";
-            this.button4.UseVisualStyleBackColor = true;
+            this.Button_Close.FlatAppearance.BorderSize = 0;
+            this.Button_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Close.Font = new System.Drawing.Font("Corbel", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Close.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Button_Close.Location = new System.Drawing.Point(524, 1);
+            this.Button_Close.Name = "Button_Close";
+            this.Button_Close.Size = new System.Drawing.Size(18, 19);
+            this.Button_Close.TabIndex = 1;
+            this.Button_Close.Text = "X";
+            this.Button_Close.UseVisualStyleBackColor = true;
+            this.Button_Close.Click += new System.EventHandler(this.Button_Close_Click);
             // 
             // button5
             // 
@@ -198,8 +199,8 @@
             this.ClientSize = new System.Drawing.Size(543, 366);
             this.Controls.Add(this.Text_Messages);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Button_Send);
+            this.Controls.Add(this.Text_Message);
             this.Controls.Add(this.TopMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MessengerWindow";
@@ -216,17 +217,17 @@
 
         #endregion
         private System.Windows.Forms.Panel TopMenu;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox Text_Message;
+        private System.Windows.Forms.Button Button_Send;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox Text_IP;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Button_Connect;
         private System.Windows.Forms.RichTextBox Text_Messages;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button Button_Close;
     }
 }
 
