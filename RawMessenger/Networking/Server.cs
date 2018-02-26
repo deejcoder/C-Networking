@@ -56,7 +56,7 @@ namespace RawMessenger.Networking
                 mainSocket.Listen(port);
 
                 mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), so);
-                logger.ServerLog("SERVER: Incoming connection from " + ipAddress + ":" + port + "\n");
+                //logger.ServerLog("SERVER: Incoming connection from " + ipAddress + ":" + port + "\n");
             }
             catch(SocketException e)
             {
@@ -83,14 +83,15 @@ namespace RawMessenger.Networking
             //give reference to new socket, to workSocket of new connection
             StateObject so = (StateObject)ar.AsyncState;
             so.workSocket = mainSocket.EndAccept(ar);
+            mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), so);
 
-            logger.ServerLog("Connection from " + so.ip + ":" + so.port + " successful.\n");
+            //logger.ServerLog("Connection from " + so.ip + ":" + so.port + " successful.\n");
             ++count;
 
             so.workSocket.BeginReceive(so.buffer, 0, Constants.BUFFER_SIZE, 0, new AsyncCallback(OnIncomingData), so);
 
-            mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), null);
-            
+
+
         }
 
         public void OnIncomingData(IAsyncResult ar)
@@ -104,7 +105,8 @@ namespace RawMessenger.Networking
             {
                 content = Encoding.ASCII.GetString(so.buffer, 0, bytesRead);
                 logger.MessageLog(so.ip + ":" + so.port, content + "\n");
-            } 
+            }
+            so.workSocket.Disconnect(true);
         }
     }
 }
