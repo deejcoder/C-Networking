@@ -42,8 +42,8 @@ namespace RawMessenger.Logging
 
         public void MessageLog(string who, string msg)
         {
-            string path = LOG_PATH + who + ".log";
-            msg = GetDateTime() + " " + msg + "\n";
+            string path = LOG_PATH + who[3] + ".log";
+            msg = GetDateTime() + " " + who + " says\n" + msg + "\n";
 
             if(!File.Exists(path))
             {
@@ -69,7 +69,7 @@ namespace RawMessenger.Logging
             DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
             CultureInfo ci = new CultureInfo("en-US");
 
-            return dt.ToString("u");
+            return dt.ToString("T");
         }
     }
 }

@@ -21,8 +21,6 @@ namespace RawMessenger.Networking
         public void Send(string ip, string msg)
         {
 
-            logger.ServerLog("Establishing connection to ... " + ip + "\n");
-
             try
             {
 
@@ -46,7 +44,7 @@ namespace RawMessenger.Networking
             catch (SocketException e)
             {
 
-                logger.ServerLog("An error has occured: " + e.ToString());
+                logger.ServerLog("CLIENT: An error has occured: " + e.ToString());
             }
 
          }

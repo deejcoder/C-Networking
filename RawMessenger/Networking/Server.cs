@@ -17,38 +17,46 @@ namespace RawMessenger.Networking
     {
         public Socket workSocket;
         public byte[] buffer = new byte[Constants.BUFFER_SIZE];
+        public IPAddress ip;
+        public int port;
 
 
     }
     class Server
     {
+        private Logging.Console logger;
         private Socket mainSocket;
         private int count;
-        private MessengerWindow window;
 
         public Server(MessengerWindow window) {
-            this.window = window;
+            logger = new Logging.Console(window);
 
         }
 
-        private Logging.Console logger;
-        public void StartListening()
+        
+        public void StartListening(int port)
         {
-            logger = new Logging.Console(window);
-            logger.ServerLog("Starting server on localhost:5050...\n");
+
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 5050);
+            StateObject so = new StateObject();
+            so.ip = ipAddress;
+            so.port = port;
+
+            logger.ServerLog("SERVER: Starting server on " + ipAddress + ":" + Constants.PORT + " ...\n");
+
+
 
             mainSocket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
             try
             {
                 mainSocket.Bind(localEndPoint);
                 mainSocket.Listen(Constants.PORT);
 
-                logger.ServerLog("Listening...\n");
-                mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), null);
-                logger.ServerLog("Incoming connection from " + localEndPoint + "\n");
+                mainSocket.BeginAccept(new AsyncCallback(OnClientIncomingConnection), so);
+                logger.ServerLog("SERVER: Incoming connection from " + ipAddress + ":" + Constants.PORT + "\n");
             }
             catch(SocketException e)
             {
@@ -60,7 +68,8 @@ namespace RawMessenger.Networking
 
         public void OnClientIncomingConnection(IAsyncResult ar)
         {
-            logger.ServerLog("Connected.\n");
+            
+            
             //if max clients for now, reject connection
             if (count > Constants.MAX_CLIENTS)
             {
@@ -68,11 +77,14 @@ namespace RawMessenger.Networking
                 return;
             }
 
-            
-            StateObject so = new StateObject();
+
+
 
             //give reference to new socket, to workSocket of new connection
+            StateObject so = (StateObject)ar.AsyncState;
             so.workSocket = mainSocket.EndAccept(ar);
+
+            logger.ServerLog("Connection from " + so.ip + ":" + so.port + " successful.\n");
             ++count;
 
             so.workSocket.BeginReceive(so.buffer, 0, Constants.BUFFER_SIZE, 0, new AsyncCallback(OnIncomingData), so);
@@ -91,7 +103,7 @@ namespace RawMessenger.Networking
             if(bytesRead > 0 && bytesRead < Constants.BUFFER_SIZE)
             {
                 content = Encoding.ASCII.GetString(so.buffer, 0, bytesRead);
-                logger.ServerLog(content + "\n");
+                logger.MessageLog(so.ip + ":" + so.port, content + "\n");
             } 
         }
     }
